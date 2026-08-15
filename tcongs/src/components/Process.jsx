@@ -1,6 +1,15 @@
 // src/components/Process.jsx
+
 import { motion } from "framer-motion";
 import { useTilt } from "../hooks/useTilt";
+
+// Process Images
+import discovery from "../assets/Discovery Business Market Analysis.jpg";
+import planning from "../assets/Planning.jpg";
+import design from "../assets/Design UIUX Branding.jpg";
+import development from "../assets/Development Web App Development.jpg";
+import testing from "../assets/quality.jpg";
+import launch from "../assets/Launch.jpg";
 
 const steps = [
   {
@@ -8,6 +17,8 @@ const steps = [
     title: "Discovery",
     sub: "Business & Market Analysis",
     desc: "We understand your business goals, target audience, and competitors. This helps us define the right strategy to build a strong digital foundation.",
+    image: discovery,
+
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -21,11 +32,14 @@ const steps = [
       </svg>
     ),
   },
+
   {
     n: "02",
     title: "Planning",
     sub: "Strategy & Architecture",
     desc: "We create detailed project plans, user flows, and system architecture to ensure smooth development and clear execution.",
+    image: planning,
+
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -39,11 +53,14 @@ const steps = [
       </svg>
     ),
   },
+
   {
     n: "03",
     title: "Design",
     sub: "UI/UX & Branding",
     desc: "Our team designs modern, user-friendly interfaces that enhance user experience and reflect your brand identity.",
+    image: design,
+
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -59,11 +76,14 @@ const steps = [
       </svg>
     ),
   },
+
   {
     n: "04",
     title: "Development",
     sub: "Web & App Development",
     desc: "We build fast, scalable, and secure websites and applications using modern technologies tailored to your business needs.",
+    image: development,
+
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -80,11 +100,14 @@ const steps = [
       </svg>
     ),
   },
+
   {
     n: "05",
     title: "Testing",
     sub: "Quality Assurance",
     desc: "We test every feature to ensure performance, security, and usability across all devices before launch.",
+    image: testing,
+
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -98,11 +121,14 @@ const steps = [
       </svg>
     ),
   },
+
   {
     n: "06",
     title: "Launch & Growth",
     sub: "Deployment & Marketing",
     desc: "After launch, we help you scale with SEO, digital marketing, and continuous optimization to grow your business online.",
+    image: launch,
+
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -127,29 +153,178 @@ function StepCard({ step, i }) {
       ref={ref}
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
-      initial={{ opacity: 0, y: 25 }}
+      initial={{ opacity: 0, y: 35 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-60px" }}
-      transition={{ delay: (i % 3) * 0.08 }}
-      style={{ rotateX, rotateY, transformPerspective: 900 }}
-      className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] p-7"
+      viewport={{
+        once: true,
+        margin: "-60px",
+      }}
+      transition={{
+        duration: 0.6,
+        delay: (i % 3) * 0.08,
+      }}
+      style={{
+        rotateX,
+        rotateY,
+        transformPerspective: 900,
+      }}
+      className="
+        group relative overflow-hidden
+        rounded-2xl
+        border border-white/10
+        bg-white/[0.025]
+        p-5
+        transition-colors
+        duration-500
+        hover:border-lime-300/20
+      "
     >
+      {/* Mouse Glow */}
       <motion.div
-        className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        className="
+          pointer-events-none
+          absolute inset-0
+          opacity-0
+          transition-opacity
+          duration-300
+          group-hover:opacity-100
+        "
         style={{
-          background: `radial-gradient(180px circle at ${glowX} ${glowY}, rgba(200,255,61,0.12), transparent 70%)`,
+          background: `radial-gradient(
+            180px circle at ${glowX} ${glowY},
+            rgba(200,255,61,0.12),
+            transparent 70%
+          )`,
         }}
       />
+
       <div className="relative">
+        {/* IMAGE */}
+        <div
+          className="
+            relative mb-6
+            h-48
+            overflow-hidden
+            rounded-xl
+            border border-white/10
+            bg-white/[0.03]
+          "
+        >
+          <img
+            src={step.image}
+            alt={step.title}
+            className="
+              h-full
+              w-full
+              object-cover
+              transition-transform
+              duration-700
+              ease-out
+              group-hover:scale-105
+            "
+          />
+
+          {/* Image Overlay */}
+          <div
+            className="
+              pointer-events-none
+              absolute inset-0
+              bg-gradient-to-t
+              from-black/50
+              via-transparent
+              to-transparent
+            "
+          />
+
+          {/* Step Number */}
+          <span
+            className="
+              absolute
+              right-4
+              top-4
+              rounded-full
+              border border-white/10
+              bg-black/40
+              px-3
+              py-1
+              text-xs
+              font-medium
+              text-white/60
+              backdrop-blur-md
+            "
+          >
+            {step.n}
+          </span>
+        </div>
+
+        {/* Icon + Number */}
         <div className="flex items-center justify-between">
-          <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-lime-300/25 bg-lime-300/10 text-lime-300">
+          <div
+            className="
+              flex h-12 w-12
+              items-center justify-center
+              rounded-xl
+              border border-lime-300/25
+              bg-lime-300/10
+              text-lime-300
+              transition-all
+              duration-300
+              group-hover:border-lime-300/40
+              group-hover:bg-lime-300/15
+              group-hover:shadow-[0_0_25px_rgba(200,255,61,0.08)]
+            "
+          >
             {step.icon}
           </div>
-          <span className="text-3xl font-bold text-white/10">{step.n}</span>
+
+          <span
+            className="
+              text-3xl
+              font-bold
+              text-white/[0.06]
+              transition-colors
+              duration-300
+              group-hover:text-lime-300/10
+            "
+          >
+            {step.n}
+          </span>
         </div>
-        <h3 className="mt-5 text-xl font-semibold">{step.title}</h3>
-        <p className="text-sm font-medium text-lime-300/80">{step.sub}</p>
-        <p className="mt-2 text-sm text-white/50">{step.desc}</p>
+
+        {/* Content */}
+        <h3
+          className="
+            mt-5
+            text-xl
+            font-semibold
+            tracking-tight
+            text-white
+          "
+        >
+          {step.title}
+        </h3>
+
+        <p
+          className="
+            mt-1
+            text-sm
+            font-medium
+            text-lime-300/80
+          "
+        >
+          {step.sub}
+        </p>
+
+        <p
+          className="
+            mt-3
+            text-sm
+            leading-6
+            text-white/50
+          "
+        >
+          {step.desc}
+        </p>
       </div>
     </motion.div>
   );
@@ -157,23 +332,98 @@ function StepCard({ step, i }) {
 
 export default function Process() {
   return (
-    <section className="bg-[#0a0a0d] px-6 py-28 text-white">
-      <div className="mx-auto max-w-6xl">
-        <p className="text-sm font-medium uppercase tracking-widest text-lime-300">
-          Our Process, Your Growth
-        </p>
-        <h2 className="mt-3 max-w-2xl text-3xl md:text-5xl font-bold tracking-tight">
-          From Idea to Scalable Digital Solution
-        </h2>
-        <p className="mt-4 max-w-2xl text-white/50">
-          At Tcongs Infotech, we follow a proven process to transform your ideas
-          into high-performing digital products. From strategy to execution, we
-          focus on delivering scalable and result-driven solutions.
-        </p>
+    <section
+      id="process"
+      className="
+        relative
+        overflow-hidden
+        bg-[#0a0a0d]
+        px-6
+        py-28
+        text-white
+        md:py-36
+      "
+    >
+      {/* Background Glow */}
+      <div
+        className="
+          pointer-events-none
+          absolute
+          left-1/2
+          top-0
+          h-[400px]
+          w-[600px]
+          -translate-x-1/2
+          rounded-full
+          bg-lime-300/[0.035]
+          blur-[120px]
+        "
+      />
 
-        <div className="mt-14 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {steps.map((s, i) => (
-            <StepCard key={s.n} step={s} i={i} />
+      <div className="relative mx-auto max-w-6xl">
+        {/* Section Heading */}
+        <motion.div
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <p
+            className="
+              text-sm
+              font-medium
+              uppercase
+              tracking-widest
+              text-lime-300
+            "
+          >
+            Our Process, Your Growth
+          </p>
+
+          <h2
+            className="
+              mt-3
+              max-w-2xl
+              text-3xl
+              font-bold
+              tracking-tight
+              sm:text-4xl
+              md:text-5xl
+            "
+          >
+            From Idea to Scalable Digital Solution
+          </h2>
+
+          <p
+            className="
+              mt-4
+              max-w-2xl
+              text-sm
+              leading-7
+              text-white/50
+              md:text-base
+            "
+          >
+            At Tcongs Infotech, we follow a proven process to transform your
+            ideas into high-performing digital products. From strategy to
+            execution, we focus on delivering scalable and result-driven
+            solutions.
+          </p>
+        </motion.div>
+
+        {/* Process Cards */}
+        <div
+          className="
+            mt-14
+            grid
+            grid-cols-1
+            gap-5
+            md:grid-cols-2
+            lg:grid-cols-3
+          "
+        >
+          {steps.map((step, i) => (
+            <StepCard key={step.n} step={step} i={i} />
           ))}
         </div>
       </div>
